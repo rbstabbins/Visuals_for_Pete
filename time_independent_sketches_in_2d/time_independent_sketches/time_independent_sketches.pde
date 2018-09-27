@@ -7,20 +7,22 @@
   int[] r_pot = new int[w*h];
   int[] g_pot = new int[w*h];
   int[] b_pot = new int[w*h];
-  int[] r_stats = { 186, 5 };
-  int[] g_stats = { 134, 5 };
-  int[] b_stats = { 38, 5 };
+  int[] r_stats = { 186, 50 };
+  int[] g_stats = { 134, 50 };
+  int[] b_stats = { 38, 50 };
   
 void setup() {
   size(512,512);
   //Make random array for all pixels
   perlin_noise_colour(r_stats,g_stats, b_stats);
+  //gauss_noise_colour(r_stats,g_stats, b_stats);
   
 }
 
 void draw() {
   background(186, 134, 38);
   perlin_noise_colour(r_stats,g_stats, b_stats);
+  //gauss_noise_colour(r_stats,g_stats, b_stats);
   loadPixels();
   for (int i = 0; i < width*height; i++) {
     //int r = r_pot[i];
