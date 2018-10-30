@@ -18,8 +18,23 @@ void debug_window() {
     if (a >= max_a) { max_a = a;}
     a = map(a, 0.0,max_a,0,debug_height/3);    
     fill(0);
-    point( i, debug1_xy[3]-a );    
+    point( i, debug1_xy[3]-a );  
+    //println(i);
   }
+  
+  //Overplot adjusted spectrum over debug1  
+  //Note, inherit max_a from previous
+  for (int i=0; i < fft_debug.avgSize(); i++) {    
+    float a = fft_debug.getAvg(i);    
+    a = a*debug_EQ[i];
+    //println(debug_EQ[i]);
+    a = map(a, 0.0,max_a,0,debug_height/3);  
+    stroke(255,0,0);
+    fill(0);
+    point( i, debug1_xy[3]-a ); 
+    point( i, (debug1_xy[3] - (debug_EQ[i]*debug_height/3)) ); 
+  }
+  stroke(255);
   //Put Frequency Differential of spectrum in debug2
   float max_dadf = 1.0;
   for (int i=1; i < fft_debug.avgSize(); i++) {    
@@ -34,7 +49,7 @@ void debug_window() {
   if (debug_buffer_count == debug_buffer_size) {
       fft_debug_buffer = fft_debug_buffer_next;
       //println(fft_debug_buffer_next);
-      fft_debug_buffer_next = new float[debug_width];
+      fft_debug_buffer_next = new float[fft_debug.avgSize()];
       debug_buffer_count = 0;
   }
   else {   debug_buffer_count++; }
@@ -47,4 +62,5 @@ void debug_window() {
     fill(0);
     point( i, debug3_xy[1]+debug_height/6-dadt);    
   }
+  stroke(0);
 }
