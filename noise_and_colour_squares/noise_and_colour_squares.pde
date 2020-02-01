@@ -9,6 +9,11 @@
 
 //Debugging Window Also
 
+// TODO - Add background noise
+// TODO - Change spectra to log scale, with good resolution for notes
+// TODO - Test note identification/detection
+// TODO - add some kind of delay to signal chain
+
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 
@@ -142,11 +147,11 @@ void draw() {
         rectMode(CENTER);
         colorMode(RGB, 255, 255, 255);
         fill(peak_cols[i]);
-        //strokeWeight(100*fft.getBand(i));
+        strokeWeight(100*fft.getBand(i));
         side = fft.specSize() - peaks[i];
         side = round(map(side, 0, fft.specSize(), 0, height/2));  
         println(side);
-        rect( width/2, height/2, side, side);
+        //rect( width/2, height/2, side, side);
       }  
 }
 //---------------------------------------------------------------

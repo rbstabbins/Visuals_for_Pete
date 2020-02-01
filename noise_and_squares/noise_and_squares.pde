@@ -60,6 +60,7 @@ void setup() {
 
   //Audio Listening
   minim = new Minim(this);  //initiate the minim object
+  
   in = minim.getLineIn(2);  //Attach to laptop microphone
   fft = new FFT(in.bufferSize(), in.sampleRate() );
   fft_buffer = new float[in.bufferSize()];  
@@ -86,36 +87,36 @@ void draw() {
   
   //Noise Pattern
   //Squares
-      //for(int i = 0; i < fft.specSize(); i++)
-      //{        
-      //  fft_buffer_next[i] = fft_buffer_next[i] + fft.getBand(i);       
-      //}
-    //if (buffer_count == buffer_size) {
-      //fft_buffer = fft_buffer_next;
-      ////println(fft_debug_buffer_next);
-      //fft_buffer_next = new float[in.bufferSize()];
-      //buffer_count = 0;
-  //}
-  ////else {   buffer_count++; }
-  //  float max_a = 1.0;
-  //  for(int i = 0; i < fft.specSize(); i++)
-  //    {
-  //      // draw some rectangles based on the band and amplitude
-  //      rectMode(CENTER);
-  //      a = fft.getBand(i);
-  //      if (a >= max_a) { max_a = a;}
-  //      //a = map(a, 0.0,max_a, 0,256); 
-  //      //colorMode(HSB, 1000, 1.0, max_a);
-  //      stroke(peak_cols[0]);
-  //      //strokeWeight(100*fft.getBand(i));
-  //      rect( width/2, height/2, fft.specSize()-i, fft.specSize()-i );
-      
-  for (int i = 0; i < 3; i++) {
-        rectMode(CENTER);
-        colorMode(HSB, 1000, 1.0, 10.0);
-        stroke(peak_cols[i]);
-        //strokeWeight(100*fft.getBand(i));
-        rect( width/2, height/2, fft.specSize()*i, fft.specSize()*i );
+      for(int i = 0; i < fft.specSize(); i++)
+      {        
+        fft_buffer_next[i] = fft_buffer_next[i] + fft.getBand(i);       
       }
+    if (buffer_count == buffer_size) {
+      fft_buffer = fft_buffer_next;
+      //println(fft_debug_buffer_next);
+      fft_buffer_next = new float[in.bufferSize()];
+      buffer_count = 0;
+  }
+  else {   buffer_count++; }
+    //float max_a = 1.0;
+    //for(int i = 0; i < fft.specSize(); i++)
+    //  {
+    //    // draw some rectangles based on the band and amplitude
+    //    rectMode(CENTER);
+    //    a = fft.getBand(i);
+    //    if (a >= max_a) { max_a = a;}
+    //    //a = map(a, 0.0,max_a, 0,256); 
+    //    //colorMode(HSB, 1000, 1.0, max_a);
+    //    stroke(peak_cols[0]);
+    //    //strokeWeight(100*fft.getBand(i));
+    //    rect( width/2, height/2, fft.specSize()-i, fft.specSize()-i );
+    //  }
+  //for (int i = 0; i < 3; i++) {
+  //      rectMode(CENTER);
+  //      colorMode(HSB, 1000, 1.0, 10.0);
+  //      stroke(peak_cols[i]);
+  //      //strokeWeight(100*fft.getBand(i));
+  //      rect( width/2, height/2, fft.specSize()*i, fft.specSize()*i );
+  //    }
   
 }
